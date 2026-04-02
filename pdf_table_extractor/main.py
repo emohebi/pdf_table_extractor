@@ -229,7 +229,6 @@ Output files:
     
     parser.add_argument(
         "--deployment",
-        default="gpt-4o",
         help="Azure OpenAI deployment name (default: gpt-4o)"
     )
     
@@ -240,9 +239,9 @@ Output files:
     )
     
     args = parser.parse_args()
-    args.pdf_path = "pdf_table_extractor/input/C1.101 [PBC] RTP Deed of Settlement and Restatement - final execution version (combined).pdf"
+    args.pdf_path = "pdf_table_extractor/input/Amended and Restated GPSFA – KPMG – Fully Executed 151221 (2).pdf"
     args.test_connection = False
-    args.pages = '238-241'
+    args.pages = None
     args.dpi = 200
     # Configure logging
     log_level = "DEBUG" if args.verbose else "INFO"

@@ -322,7 +322,7 @@ class TableDetector:
                         {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}", "detail": "high"}}
                     ]
                 }],
-                max_tokens=1024,
+                max_completion_tokens=1024,
                 temperature=0
             )
             

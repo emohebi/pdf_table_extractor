@@ -287,7 +287,7 @@ class MultiPageExtractor:
         response = self.extractor.client.chat.completions.create(
             model=self.extractor.deployment,
             messages=[{"role": "user", "content": content}],
-            max_tokens=self.max_tokens,
+            max_completion_tokens=self.max_tokens,
             temperature=0
         )
         

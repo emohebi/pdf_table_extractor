@@ -174,17 +174,22 @@ class GPT4VisionExtractor(BaseExtractor):
         logger.info(f"  API Key: {masked_key}")
         
         # Initialize client
-        from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+        # from azure.identity import DefaultAzureCredential, get_bearer_token_provider
         import httpx
-        token_provider = get_bearer_token_provider(
-            DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
-        )
+        # token_provider = get_bearer_token_provider(
+        #     DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+        # )
         http_client = httpx.Client(verify=False)
         try:
+            # self.client = AzureOpenAI(
+            #     azure_ad_token_provider=token_provider,
+            #     api_version=self.api_version,
+            #     azure_endpoint=self.endpoint,
+            #     http_client=http_client
+            # )
             self.client = AzureOpenAI(
-                azure_ad_token_provider=token_provider,
+                azure_endpoint=self.endpoint, api_key=self.api_key,
                 api_version=self.api_version,
-                azure_endpoint=self.endpoint,
                 http_client=http_client
             )
         except Exception as e:
@@ -221,7 +226,7 @@ class GPT4VisionExtractor(BaseExtractor):
                 messages=[
                     {"role": "user", "content": "Reply with just the word 'OK'."}
                 ],
-                max_tokens=10
+                max_completion_tokens=10
             )
             
             result = response.choices[0].message.content
@@ -402,7 +407,7 @@ class GPT4VisionExtractor(BaseExtractor):
                             ]
                         }
                     ],
-                    max_tokens=self.max_tokens,
+                    max_completion_tokens=self.max_tokens,
                     temperature=self.temperature
                 )
                 
